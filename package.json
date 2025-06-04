@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@t3-oss/env-nextjs": "^0.13.6",
     "drizzle-orm": "^0.44.2",
     "next": "15.3.3",
     "pg": "^8.16.0",
