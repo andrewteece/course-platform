@@ -5,10 +5,6 @@ import { CourseProductTable } from './courseProduct';
 import { UserCourseAccessTable } from './userCourseAccess';
 import { CourseSectionTable } from './courseSection';
 
-export const lessonStatuses = ['public', 'private', 'preview'] as const;
-export type LessonStatus = (typeof lessonStatuses)[number];
-export const lessonStatusEnum = pgEnum('lesson_status', lessonStatuses);
-
 export const CourseTable = pgTable('courses', {
   id,
   name: text().notNull(),
