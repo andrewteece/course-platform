@@ -1,6 +1,13 @@
 import { relations } from 'drizzle-orm';
 import { pgTable, text } from 'drizzle-orm/pg-core';
 import { createdAt, id, updatedAt } from '../schemaHelpers';
+import { CourseProductTable } from './courseProduct';
+import { UserCourseAccessTable } from './userCourseAccess';
+import { CourseSectionTable } from './courseSection';
+
+export const lessonStatuses = ['public', 'private', 'preview'] as const;
+export type LessonStatus = (typeof lessonStatuses)[number];
+export const lessonStatusEnum = pgEnum('lesson_status', lessonStatuses);
 
 export const CourseTable = pgTable('courses', {
   id,
