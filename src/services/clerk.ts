@@ -8,11 +8,47 @@ import { redirect } from 'next/navigation';
 
 const client = await clerkClient();
 
+// export async function getCurrentUser({ allData = false } = {}) {
+//   const { userId, sessionClaims, redirectToSignIn } = await auth();
+
+//   if (userId != null && sessionClaims.dbId == null) {
+//     redirect('/api/clerk/syncUsers');
+//     // redirect('');
+//   }
+
+//   return {
+//     clerkUserId: userId,
+//     userId: sessionClaims?.dbId,
+//     role: sessionClaims?.role,
+//     user:
+//       allData && sessionClaims?.dbId != null
+//         ? await getUser(sessionClaims.dbId)
+//         : undefined,
+//     redirectToSignIn,
+//   };
+// }
+
 export async function getCurrentUser({ allData = false } = {}) {
   const { userId, sessionClaims, redirectToSignIn } = await auth();
 
-  if (userId != null && sessionClaims.dbId == null) {
-    redirect('/api/clerk/syncUsers');
+  if (userId != null && sessionClaims?.dbId == null) {
+    // Query user from DB and sync to Clerk metadata
+    const dbUser = await db.query.UserTable.findFirst({
+      where: eq(UserTable.clerkUserId, userId),
+    });
+
+    if (dbUser) {
+      await syncClerkUserMetadata(dbUser);
+    }
+
+    // Re-run auth() if needed (because metadata is now updated)
+    return {
+      clerkUserId: userId,
+      userId: dbUser?.id,
+      role: dbUser?.role,
+      user: allData ? dbUser : undefined,
+      redirectToSignIn,
+    };
   }
 
   return {

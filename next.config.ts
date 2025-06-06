@@ -5,6 +5,7 @@ const nextConfig: NextConfig = {
   experimental: {
     // dynamicIO: true,
     authInterrupts: true,
+    useCache: true,
   },
 };
 

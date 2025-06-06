@@ -1,4 +1,6 @@
 import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs';
+import { getCurrentUser } from '@/services/clerk';
+import { canAccessAdminPages } from '@/permissions/general';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { ReactNode, Suspense } from 'react';
@@ -26,6 +28,7 @@ function Navbar() {
         </Link>
         <Suspense>
           <SignedIn>
+            <AdminLink />
             <Link
               className='hover:bg-accent/10 flex items-center px-2'
               href='/courses'
