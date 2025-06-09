@@ -17,6 +17,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { createCourse, updateCourse } from '../actions/courses';
+import { toast } from 'sonner';
 
 export function CourseForm({
   course,
@@ -39,7 +40,8 @@ export function CourseForm({
     const action =
       course == null ? createCourse : updateCourse.bind(null, course.id);
     const data = await action(values);
-    actionToast({ actionData: data });
+    // actionToast({ actionData: data });
+    toast({ toast: data });
   }
 
   return (
