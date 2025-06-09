@@ -1,3 +1,4 @@
+import { ActionButton } from '@/components/ActionButton';
 import {
   Table,
   TableBody,
@@ -10,6 +11,7 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { formatPlural } from '@/lib/formatters';
 import { Trash2Icon } from 'lucide-react';
+import { deleteCourse } from '../actions/courses';
 
 export function CourseTable({
   courses,
