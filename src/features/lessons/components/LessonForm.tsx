@@ -26,7 +26,7 @@ import {
 import { lessonSchema } from '../schemas/lessons';
 import { Textarea } from '@/components/ui/textarea';
 import { createLesson, updateLesson } from '../actions/lessons';
-import { YouTubeVideoPlayer } from './YouTubeVideoPlayer';
+import { YouTubeVideoPlayer } from './YouTubeVIdeoPlayer';
 
 export function LessonForm({
   sections,
