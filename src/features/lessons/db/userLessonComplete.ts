@@ -1,7 +1,7 @@
 import { db } from '@/drizzle/db';
 import { UserLessonCompleteTable } from '@/drizzle/schema';
 import { and, eq } from 'drizzle-orm';
-import { revalidateUserLessonCompleteCache } from './cache/userLessonComplete';
+import { revalidateUserLessonCompleteCache } from './cache//userLessonComplete';
 
 export async function updateLessonCompleteStatus({
   lessonId,
