@@ -17,7 +17,6 @@ import { getLessonCourseTag } from '@/features/lessons/db/cache/lessons';
 import { asc, eq } from 'drizzle-orm';
 import { EyeClosed, PlusIcon } from 'lucide-react';
 import { cacheTag } from 'next/dist/server/use-cache/cache-tag';
-
 import { notFound } from 'next/navigation';
 
 export default async function EditCoursePage({
@@ -32,7 +31,7 @@ export default async function EditCoursePage({
 
   return (
     <div className='container my-6'>
-      <PageHeader title={course.name} />
+      <PageHeader title={course!.name} />
       <Tabs defaultValue='lessons'>
         <TabsList>
           <TabsTrigger value='lessons'>Lessons</TabsTrigger>
@@ -42,7 +41,7 @@ export default async function EditCoursePage({
           <Card>
             <CardHeader className='flex items-center flex-row justify-between'>
               <CardTitle>Sections</CardTitle>
-              <SectionFormDialog courseId={course.id}>
+              <SectionFormDialog courseId={course!.id}>
                 <DialogTrigger asChild>
                   <Button variant='outline'>
                     <PlusIcon /> New Section
@@ -52,13 +51,13 @@ export default async function EditCoursePage({
             </CardHeader>
             <CardContent>
               <SortableSectionList
-                courseId={course.id}
-                sections={course.courseSections}
+                courseId={course!.id}
+                sections={course!.courseSections}
               />
             </CardContent>
           </Card>
           <hr className='my-2' />
-          {course.courseSections.map((section) => (
+          {course!.courseSections.map((section) => (
             <Card key={section.id}>
               <CardHeader className='flex items-center flex-row justify-between gap-4'>
                 <CardTitle
@@ -71,7 +70,7 @@ export default async function EditCoursePage({
                 </CardTitle>
                 <LessonFormDialog
                   defaultSectionId={section.id}
-                  sections={course.courseSections}
+                  sections={course!.courseSections}
                 >
                   <DialogTrigger asChild>
                     <Button variant='outline'>
@@ -82,7 +81,7 @@ export default async function EditCoursePage({
               </CardHeader>
               <CardContent>
                 <SortableLessonList
-                  sections={course.courseSections}
+                  sections={course!.courseSections}
                   lessons={section.lessons}
                 />
               </CardContent>
@@ -92,7 +91,7 @@ export default async function EditCoursePage({
         <TabsContent value='details'>
           <Card>
             <CardHeader>
-              <CourseForm course={course} />
+              <CourseForm course={course!} />
             </CardHeader>
           </Card>
         </TabsContent>

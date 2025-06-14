@@ -1,3 +1,7 @@
 export default function AdminPage() {
-  return <h1>TODO: Fix</h1>;
+  return (
+    <div className='container'>
+      <h1>AdminPage</h1>
+    </div>
+  );
 }
